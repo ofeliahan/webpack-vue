@@ -2,11 +2,16 @@
 
 //引入vue
 import Vue from 'vue';
+import './styles/style.scss';
 
 
 new Vue ({
   el:'#app',
   data:{
-    msg:'hello'
-  }
+    msg:'hello',
+    name:'张三'
+  },
+  template:`
+    <h1>template</h1>
+  `
 })

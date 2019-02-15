@@ -5,6 +5,7 @@ const HtmlWebpackPlugin =require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 
+
 module.exports = {
   //模式
   mode:'development',//两个选项:development (开发)  production(生产,运行)
@@ -18,6 +19,30 @@ module.exports = {
     filename:'bundle.js'              //打包后文件的名字
     
   },
+
+
+  module:{
+    //规则
+    rules:[
+      {
+        test:/\.css$/,  //找到匹配的文件模块
+        //注意 use 里的加载器名要按照使用的顺序倒着写
+        use:[
+          'style-loader',
+          'css-loader'
+        ]    //要使用什么加载器去处理这个模块文件
+      },
+      {
+        test:/\.scss$/,
+        use:[
+          'style-loader',
+          'css-loader',
+          'sass-loader'
+        ]
+      }
+    ]
+  },
+
 
   //插件
   plugins:[
@@ -43,7 +68,14 @@ module.exports = {
       vue:'vue/dist/vue.esm.js'
     }
 
+  },
+  //webpack-dev-server配置
+  devServer:{
+    //配置以哪个文件夹作为web服务的根路径
+    contentBase:path.resolve(__dirname,'./dist')
+  },
 
-  }
+  //
+ 
 
 }
